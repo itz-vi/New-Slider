@@ -1,0 +1,197 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Update</title>
+
+
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+
+</head>
+
+<style>
+    body {
+        background-image: linear-gradient(to top, #48c6ef 0%, #6f86d6 100%);
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-size: cover !important;
+        height: 100vh;
+        margin: 0;
+    }
+
+
+    .container {
+        width: 350px;
+        height: 500px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border-radius: 3px;
+        border: 1px solid #396afc;
+        background: linear-gradient(to right, #005c97, #363795);
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+    }
+
+    .container form .descr {
+        font-size: 20px;
+        font-weight: 500;
+        color: #e8e8e8;
+        text-align: center;
+    }
+
+    .form {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .input {
+        margin: 10px 0px 5px 0px;
+        width: 300px;
+        position: relative;
+    }
+
+    textarea {
+        margin: 1em 0 1em 0;
+        width: 300px;
+        position: relative;
+    }
+
+    .input input,
+    textarea {
+        font-size: 100%;
+        padding: 10px;
+        padding-left: 0;
+        outline: none;
+        color: #e8e8e8;
+        border: none;
+        border-bottom: 2px solid #e8e8e8;
+        background: transparent;
+        border-radius: none;
+        width: 100%;
+        resize: none;
+    }
+
+    .input label {
+        font-size: 100%;
+        position: absolute;
+        color: #e8e8e8;
+        pointer-events: none;
+        transition: all 0.5s ease;
+        text-transform: uppercase;
+    }
+
+
+
+    .input textarea:focus~label,
+    .input textarea:valid~label {
+        transform: translateY(-50%) scale(.9);
+
+        padding: 0.4em;
+        background: transparent;
+    }
+
+    .inputGroup :is(input:focus, input:valid) {
+        border-color: rgb(37, 37, 211);
+    }
+
+    .form button {
+        color: #e8e8e8;
+        font-size: 17px;
+        align-self: flex-start;
+        padding: 10px;
+        border: none;
+        cursor: pointer;
+        margin-top: 30px;
+        margin-bottom: 20px;
+        background: transparent;
+        transition: all 0.3s ease-in-out;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .form button:before {
+        content: "";
+        position: absolute;
+        bottom: 100%;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background-color: #e8e8e8;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
+    }
+
+    .form button:hover:before {
+        opacity: 0.2;
+    }
+
+    .form button:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+    }
+
+    .top {
+        position: absolute;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: -600px;
+
+    }
+
+    #logo {
+        margin-top: 0;
+    }
+
+
+    input[type=file]::file-selector-button {
+        background-color: #13419780;
+        color: #f5fbff;
+        border: 1px double rgba(103, 163, 212, 0.375);
+        border-radius: 12px;
+        padding: 8px 10px;
+        margin-right: 20px;
+        transition: .2s;
+    }
+
+    input[type=file]::file-selector-button:hover {
+        background-color: #6db6ff39;
+    }
+</style>
+
+<body>
+
+    <div class="container">
+        <div class="top">
+            <a href="/panel">
+                <button class="btn btn-primary">Back to Slides</button>
+            </a>
+        </div>
+
+        <form class="form" action="/updateslide/<%= slide._id %>" method="post" enctype="multipart/form-data">
+            <div class="descr mt-4">Update Slide</div>
+            <div class="input">
+                <label for="name">Title</label><br>
+                <input type="text" name="title" value="<%= slide.title %>" class="mt-2">
+            </div>
+            <div class="input">
+                <label>Description</label> <br>
+                <textarea cols="30" rows="2" name="description" class="mb-0"><%= slide.description %></textarea>
+            </div>
+            <div class="input">
+                <label>Image</label> <br><br>
+                <input type="file" name="image" <%=slide.image %> >
+            </div>
+
+            <button type="submit" class="btn btn-primary">Update Slide → </button>
+        </form>
+    </div>
+
+</body>
+
+</html>

@@ -1,0 +1,584 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>carousel</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+
+<style>
+    body {
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        margin-top: 50px;
+        height: 85vh;
+        background-image: url(/images/w.jpg);
+        background-size: cover;
+        background-position: center;
+    }
+
+    .containerp {
+        padding: 10px 60px 10px 0px;
+        display: flex;
+        height: 420px;
+        width: 100%;
+        justify-content: space-around;
+        align-items: center;
+        margin: 110px 0px;
+        background: rgba(255, 255, 255, 0.096);
+        box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.76);
+        backdrop-filter: blur(0.5px);
+        -webkit-backdrop-filter: blur(0.5px);
+        border-radius: 10px;
+        border: 1px solid rgba(255, 255, 255, 0.185);
+
+    }
+
+    .containerp:hover {
+        border-radius: 12px;
+        border: 1px double rgb(154, 253, 253);
+        box-shadow: 0 4px 28px rgba(4, 238, 255, 0.589), 0 6px 20px 0 rgba(255, 3, 129, 0.19);
+
+    }
+
+    .whiskey-cards {
+        display: flex;
+        height: 350px;
+        justify-content: space-between;
+        flex-wrap: nowrap;
+        overflow-x: scroll;
+        -webkit-overflow-scrolling: touch;
+        -ms-overflow-style: none;
+        scrollbar-width: none;
+        padding: 22px 48px 0 58px;
+
+    }
+
+    .whiskey-cards::-webkit-scrollbar {
+        -webkit-appearance: none;
+        width: 5px;
+        height: 5px;
+    }
+
+    .whiskey-cards::-webkit-scrollbar-thumb {
+        border-radius: 0;
+        background-color: rgba(0, 0, 0, .5);
+        background: linear-gradient(90deg, #02bcf5, #0073e6, #003ab9, #635bff);
+        box-shadow: 0 0 1px rgba(255, 255, 255, .5);
+        border-radius: 16px;
+        opacity: .5;
+    }
+
+    .whiskey-cards:hover::-webkit-scrollbar-thumb {
+        opacity: 1;
+    }
+
+
+    .whiskey-card {
+        background-color: rgba(0, 191, 255, 0.151);
+        display: flex;
+        flex-direction: column;
+        min-width: 244px;
+        flex-basis: 244px;
+        border-radius: 16px;
+        margin: 10px 35px;
+        padding: 15px;
+        box-shadow: 0 -16px 24px rgb(0 0 0 / 5%);
+        color: #ffffff;
+        transition: all 150ms cubic-bezier(0.215, 0.61, 0.355, 1);
+    }
+
+    .mega {
+        background-image: linear-gradient(to right, #b8cbb8 0%, #b8cbb8 0%, #b465da 0%, #cf6cc9 33%, #ee609c 66%, #ee609c 100%);
+        border: 7px solid rgba(253, 245, 245, 0);
+        overflow: hidden;
+        height: 150px;
+        width: 150px;
+        border-radius: 15px;
+        box-shadow: 0px 1px 12px rgb(255, 1, 86);
+    }
+
+
+    .mega img {
+        height: 150px;
+        width: 150px;
+        width: 100%;
+        border: 15px snow rgba(0, 26, 255, 0.781);
+        border-radius: 12px;
+
+    }
+
+    .mega img:hover {
+        box-shadow: 0 -1px 22px rgba(225, 237, 247, 0.301), 0 2px 6px rgba(211, 224, 224, 0.993);
+
+    }
+
+    .whiskey-card:hover {
+        background-image: linear-gradient(120deg, #5294ff85 0%, #c2e9fb4b 100%);
+        /* background-image: linear-gradient(-225deg, #22E1FF 0%, #1D8FE1 48%, #625EB1 100%); */
+        transform: scale(1.01) translateY(-15px);
+        box-shadow: 4px -1px 10px rgba(201, 200, 200, 0.397);
+    }
+
+    .card-body {
+        display: flex;
+        justify-content: center;
+        align-items: start;
+        flex-direction: column;
+        margin: 0px;
+        padding: 10px 0px;
+    }
+
+    h4 {
+        margin-top: 89px;
+    }
+
+    .arrow-link {
+        color: white;
+        text-decoration: none !important;
+        font-size: 35px;
+        margin-top: -122px;
+        margin-left: 170px;
+
+
+    }
+
+    .arrow-link::after {
+        content: "\2192";
+    }
+
+    .arrow-link:hover {
+        color: aqua;
+    }
+
+
+    @keyframes float {
+
+        0%,
+        100% {
+            transform: translateY(0);
+        }
+
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+    .avatar {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        overflow: hidden;
+        transform: translateY(0px);
+        animation: float 2s ease-in-out infinite;
+        padding: 0 80px;
+        margin: 20px 30px;
+        width: 380px;
+    }
+
+    .avatar:hover {
+        border: 5px solid rgba(0, 255, 213, 0.692);
+        background-image: linear-gradient(120deg, #a1c4fd 0%, #c2e9fb 100%);
+        border-radius: 22px;
+        box-shadow: 0 1px 34px #003ab9;
+    }
+
+    .content {
+        background-color: #b4b4b411;
+        color: #cdf9ff;
+        font-weight: 600;
+        padding: 4px 5px;
+        border: 2px solid rgba(240, 248, 255, 0.151);
+        border-radius: 12px;
+        margin: 0;
+
+    }
+
+    .items {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .items a {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        margin-top: 40px;
+        margin-bottom: -80px;
+        text-decoration: none !important;
+    }
+
+    .button {
+        padding: 1em 2em;
+        border: none;
+        border-radius: 5px;
+        font-weight: bold;
+        letter-spacing: 5px;
+        text-transform: uppercase;
+        cursor: pointer;
+        color: #2c9caf;
+        transition: all 1000ms;
+        font-size: 15px;
+        position: relative;
+        overflow: hidden;
+        outline: 2px solid #2c9caf;
+        margin-top: 12px;
+        margin-bottom: 33px;
+    }
+
+    button:hover {
+        color: #ffffff;
+        transform: scale(1.1);
+        outline: 2px solid #70bdca;
+        box-shadow: 4px 5px 17px -4px #268391;
+    }
+
+    button::before {
+        content: "";
+        position: absolute;
+        left: -50px;
+        top: 0;
+        width: 0;
+        height: 100%;
+        background-color: #2c9caf;
+        transform: skewX(45deg);
+        z-index: -1;
+        transition: width 1000ms;
+    }
+
+    button:hover::before {
+        width: 250%;
+    }
+</style>
+
+<body>
+
+    <div class="items">
+        <a href="/addslide">
+            <button class="button">Add Slides</button>
+        </a>
+    </div>
+
+
+    <div class="containerp">
+        <div class="avatar">
+            <img src="/images/nnh.png" />
+        </div>
+
+        <!-- ------------- main Card here ---------------- -->
+        <div class="whiskey-cards alignfull">
+
+            <% if(slide.length===0) {%>
+                <h1 style="color: white;">There is NO Slide Found. Create a new Slide </h1>
+                <% } else { %>
+
+                    <% slide.forEach(slide=> { %>
+
+                        <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="http://localhost:3000/uploads/<%= slide.image %>" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>
+                                    <%= slide.title %>
+                                </h4>
+                                <p class="content">
+                                    <%= slide.description %>
+                                </p>
+                            </div>
+                        </div>
+
+
+
+
+
+                        <!-- <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="/images/images (8).jpg" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>Lorem Ipsum</h4>
+                                <p class="content">Lorem ipsum dolor sit amet, nulla paria amet, nulla pariatur.</p>
+                            </div>
+                        </div>
+
+                        <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="/images/images (7).jpg" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>Lorem Ipsum</h4>
+                                <p class="content">Lorem ipsum dolor sit amet, nulla paria amet, nulla pariatur.</p>
+                            </div>
+                        </div>
+
+                        <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="/images/gap.jpg" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>Lorem Ipsum</h4>
+                                <p class="content">Lorem ipsum dolor sit amet, nulla paria amet, nulla pariatur.</p>
+                            </div>
+                        </div>
+
+                        <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="/images/cctv.webp" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>Lorem Ipsum</h4>
+                                <p class="content">Lorem ipsum dolor sit amet, nulla paria amet, nulla pariatur.</p>
+                            </div>
+                        </div>
+
+                        <div class="whiskey-card">
+                            <div class="mega">
+                                <img src="/images/images (6).jpg" alt="">
+                            </div>
+                            <a href="/panel" class="arrow-link"></a>
+                            <div class="card-body">
+                                <h4>Lorem Ipsum</h4>
+                                <p class="content">Lorem ipsum dolor sit amet, nulla paria amet, nulla pariatur.</p>
+                            </div>
+                        </div> -->
+
+                        <% });%>
+                            <% };%>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                                <!-- <div class="whiskey-card" style="background-color: #0073e6;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">Excepteur sint occaecat cupidatat non proident, sunt in culpa qui
+                    officia
+                    deserunt mollit anim id est laborum.</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+
+            <div class="whiskey-card" style="background-color: #635bff;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+            <div class="whiskey-card">
+                <div class="mega">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkOc3jVRV3AhXA1Zno2Va7JIeLA_iJsppn6ivYut38trMZRdSJT9hO9JBQoscBgfD30&usqp=CAU"
+                        alt="">
+                </div>
+                <a href="https://www.marvel.com/movies" class="arrow-link"></a>
+                <div class="card-body">
+                    <h4>Lorem Ipsum</h4>
+                    <p class="content">Lorem ipsum dolor sit amet, nulla pariatur.</p>
+                    <p class="link"><a href="#">Learn more </p>
+                </div>
+            </div>
+
+            <div class="whiskey-card" style="background-color: #09cbcb;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+            <div class="whiskey-card" style="background-color: #02bcf5;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+            <div class="whiskey-card" style="background-color: #0073e6;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+            <div class="whiskey-card">
+                <div class="mega">
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT-mkOc3jVRV3AhXA1Zno2Va7JIeLA_iJsppn6ivYut38trMZRdSJT9hO9JBQoscBgfD30&usqp=CAU"
+                        alt="">
+                </div>
+                <a href="https://www.marvel.com/movies" class="arrow-link"></a>
+                <div class="card-body">
+                    <h4>Lorem Ipsum</h4>
+                    <p class="content">Lorem ipsum dolor sit amet, nulla pariatur.</p>
+                    <p class="link"><a href="#">Learn more </p>
+                </div>
+            </div>
+            <div class="whiskey-card" style="background-color: #003ab9;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+            <div class="whiskey-card" style="background-color: #635bff;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div>
+
+            <div class="whiskey-card" style="background-color: #09cbcb;">
+                <h3><a href="#">Lorem Ipsum</a></h3>
+                <p class="whiskey-card--content">This is an excerpt</p>
+                <p class="whiskey-card--link"><a href="#">Learn more <svg class="HoverArrow" width="10" height="10"
+                            viewBox="0 0 10 10" aria-hidden="true">
+                            <g fill-rule="evenodd">
+                                <path class="HoverArrow__linePath" d="M0 5h7"></path>
+                                <path class="HoverArrow__tipPath" d="M1 1l4 4-4 4"></path>
+                            </g>
+                        </svg></a></p>
+            </div> -->
+
+        </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            if (document.querySelector('.whiskey-cards')) {
+                // Slider dragging
+                const slider = document.querySelector('.whiskey-cards');
+                let isDown = false;
+                let startX;
+                let scrollLeft;
+
+                slider.addEventListener('mousedown', (e) => {
+                    isDown = true;
+                    slider.classList.add('active');
+                    startX = e.pageX - slider.offsetLeft;
+                    scrollLeft = slider.scrollLeft;
+                    cancelMomentumTracking();
+                });
+
+                slider.addEventListener('mouseleave', () => {
+                    isDown = false;
+                    slider.classList.remove('active');
+                });
+
+                slider.addEventListener('mouseup', () => {
+                    isDown = false;
+                    slider.classList.remove('active');
+                    beginMomentumTracking();
+                });
+
+                slider.addEventListener('mousemove', (e) => {
+                    if (!isDown) return;
+                    e.preventDefault();
+                    const x = e.pageX - slider.offsetLeft;
+                    const walk = (x - startX); //scroll-fast
+                    var prevScrollLeft = slider.scrollLeft;
+                    slider.scrollLeft = scrollLeft - walk;
+                    velX = slider.scrollLeft - prevScrollLeft;
+                });
+
+                // Momentum 
+                var velX = 0;
+                var momentumID;
+
+                slider.addEventListener('wheel', (e) => {
+                    cancelMomentumTracking();
+                });
+
+                function beginMomentumTracking() {
+                    cancelMomentumTracking();
+                    momentumID = requestAnimationFrame(momentumLoop);
+                }
+
+                function cancelMomentumTracking() {
+                    cancelAnimationFrame(momentumID);
+                }
+
+                function momentumLoop() {
+                    slider.scrollLeft += velX * 2;
+                    velX *= 0.95;
+                    if (Math.abs(velX) > 0.5) {
+                        momentumID = requestAnimationFrame(momentumLoop);
+                    }
+                }
+
+                // Scroll
+                const scrollContainer = document.querySelector(".whiskey-cards");
+
+                scrollContainer.addEventListener("wheel", (evt) => {
+                    evt.preventDefault();
+
+                    window.requestAnimationFrame(() => {
+                        scrollContainer.scrollTo({ top: 0, left: scrollContainer.scrollLeft + (evt.deltaY * 2), behavior: "smooth" });
+                    });
+                });
+            }
+        });
+    </script>
+</body>
+
+
+</html>
